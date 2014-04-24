@@ -71,6 +71,8 @@ QVariant PluginsModel::headerData(int section, Qt::Orientation orientation, int 
 
 int PluginsModel::rowCount(const QModelIndex &parent) const
 {
+	Q_UNUSED(parent);
+
 	if ( !core() )
 		return -1;
 
@@ -79,6 +81,8 @@ int PluginsModel::rowCount(const QModelIndex &parent) const
 
 int PluginsModel::columnCount(const QModelIndex &parent) const
 {
+	Q_UNUSED(parent);
+
 	return ColumnCount;
 }
 
