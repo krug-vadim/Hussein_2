@@ -22,6 +22,7 @@ class SimpleNodePlugin : public QObject,
 		virtual QString description() const;
 
 		// WidgetFactoryInterface
+		virtual QString factoryName() const;
 		virtual QWidget *create(QWidget *parent = 0);
 
 	signals:

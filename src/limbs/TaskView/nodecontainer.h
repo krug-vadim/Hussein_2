@@ -3,6 +3,8 @@
 
 #include <QtWidgets/QWidget>
 
+#include "../../interfaces/widgetfactoryinterface.h"
+
 class QKeyEvent;
 class QVBoxLayout;
 
@@ -11,12 +13,17 @@ class NodeContainer : public QWidget
 	Q_OBJECT
 
 	public:
-		explicit NodeContainer(QWidget *parent = 0);
+		explicit NodeContainer(WidgetFactories *factories = 0, QWidget *parent = 0);
+
+		WidgetFactories* factories() const;
+		void setWidgetFactories(WidgetFactories *factories);
 
 	protected:
 		void keyPressEvent(QKeyEvent *event);
 
 	private:
+		WidgetFactories *_factories;
+
 		QVBoxLayout *_taskLayout;
 };
 

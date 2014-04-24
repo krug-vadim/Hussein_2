@@ -6,6 +6,8 @@
 #include "../../interfaces/basicinterface.h"
 #include "../../interfaces/mainwindowviewinterface.h"
 
+#include "../../interfaces/widgetfactoryinterface.h"
+
 class TaskViewPlugin : public QObject,
                        public BasicInterface,
                        public MainWindowViewInterface
@@ -26,6 +28,11 @@ class TaskViewPlugin : public QObject,
 
 	signals:
 		void log(const uint event, const QString &message) const;
+
+	private:
+		void loadFactories();
+
+		WidgetFactories _factories;
 };
 
 #endif // TASKVIEWPLUGIN_H

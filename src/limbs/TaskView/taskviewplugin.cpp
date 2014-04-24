@@ -3,7 +3,6 @@
 #include "taskview.h"
 
 #include "../../interfaces/coreinterface.h"
-#include "../../interfaces/widgetfactoryinterface.h"
 
 TaskViewPlugin::TaskViewPlugin(QObject *parent) :
     QObject(parent)
@@ -17,6 +16,13 @@ QString TaskViewPlugin::description() const
 
 QWidget *TaskViewPlugin::newView(QWidget *parent)
 {
+	loadFactories();
+	return new TaskView(&_factories, parent);
+}
+
+void TaskViewPlugin::loadFactories()
+{
+	_factories.clear();
 	foreach(QObject *plugin, core()->plugins())
 	{
 		WidgetFactoryInterface *iFactory;
@@ -26,7 +32,8 @@ QWidget *TaskViewPlugin::newView(QWidget *parent)
 		if ( !iFactory )
 			continue;
 
-		emit log(0, tr("found factroy"));
+		_factories.append(iFactory);
+
+		emit log(0, tr("Found factory: «%1»").arg(iFactory->factoryName()));
 	}
-	return new TaskView(parent);
 }

@@ -10,7 +10,7 @@ namespace Ui
 
 class SimpleNodeWidget : public QWidget
 {
-		Q_OBJECT
+	Q_OBJECT
 
 	public:
 		explicit SimpleNodeWidget(QWidget *parent = 0);

@@ -5,12 +5,12 @@
 
 #include <QtWidgets/QLineEdit>
 
-NodeContainer::NodeContainer(QWidget *parent) :
-    QWidget(parent)
+NodeContainer::NodeContainer(WidgetFactories *factories, QWidget *parent) :
+    QWidget(parent),
+    _factories(factories)
 {
 	setFocusPolicy(Qt::ClickFocus);
 	_taskLayout = new QVBoxLayout(this);
-	_taskLayout->addWidget(new QLineEdit(tr("123"),this));
 	_taskLayout->addStretch(1);
 }
 
@@ -26,13 +26,11 @@ void NodeContainer::keyPressEvent(QKeyEvent *event)
 	{
 		case Qt::Key_Enter:
 		case Qt::Key_Return:
-			newWidget = new QLineEdit(this);
-			_taskLayout->insertWidget(0, newWidget);
+			if ( !_factories || _factories->isEmpty() )
+				break;
+			newWidget = _factories->at(0)->create(this);
+			_taskLayout->insertWidget(_taskLayout->count() - 1, newWidget);
 			newWidget->setFocus(Qt::MouseFocusReason);
-			break;
-
-		case Qt::Key_0:
-			_taskLayout->insertWidget(0, new QLineEdit(tr("0"), this));
 			break;
 
 		default:
@@ -41,4 +39,14 @@ void NodeContainer::keyPressEvent(QKeyEvent *event)
 	}
 
 	event->accept();
+}
+
+WidgetFactories *NodeContainer::factories() const
+{
+	return _factories;
+}
+
+void NodeContainer::setWidgetFactories(WidgetFactories *factories)
+{
+	_factories = factories;
 }

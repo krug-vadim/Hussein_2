@@ -6,6 +6,9 @@ SimpleNodeWidget::SimpleNodeWidget(QWidget *parent) :
     ui(new Ui::SimpleNodeWidget)
 {
 	ui->setupUi(this);
+
+	setFocusPolicy(Qt::ClickFocus);
+	setFocusProxy(ui->lineEdit);
 }
 
 SimpleNodeWidget::~SimpleNodeWidget()
