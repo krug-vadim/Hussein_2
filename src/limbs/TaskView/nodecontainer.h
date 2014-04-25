@@ -8,6 +8,8 @@
 class QKeyEvent;
 class QVBoxLayout;
 
+class QScrollArea;
+
 class NodeContainer : public QWidget
 {
 	Q_OBJECT
@@ -18,12 +20,19 @@ class NodeContainer : public QWidget
 		WidgetFactories* factories() const;
 		void setWidgetFactories(WidgetFactories *factories);
 
+		void setTaskScrollArea(QScrollArea *taskScrollArea);
+		QScrollArea *taskScrollArea() const;
+
 	protected:
 		void keyPressEvent(QKeyEvent *event);
+
+	private slots:
+		void moveScrollBarToBottom(int min, int max);
 
 	private:
 		WidgetFactories *_factories;
 
+		QScrollArea *_taskScrollArea;
 		QVBoxLayout *_taskLayout;
 };
 

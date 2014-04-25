@@ -15,6 +15,7 @@ QString LogDockPlugin::description() const
 
 void LogDockPlugin::logMessage(const uint event, const QString &message)
 {
+	Q_UNUSED(event);
 	_dock->appendLog(message);
 }
 

@@ -3,7 +3,8 @@
 #include <QtGui/QKeyEvent>
 #include <QtWidgets/QVBoxLayout>
 
-#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QScrollBar>
 
 NodeContainer::NodeContainer(WidgetFactories *factories, QWidget *parent) :
     QWidget(parent),
@@ -12,7 +13,11 @@ NodeContainer::NodeContainer(WidgetFactories *factories, QWidget *parent) :
 	setFocusPolicy(Qt::ClickFocus);
 	_taskLayout = new QVBoxLayout(this);
 	_taskLayout->addStretch(1);
+
+	_taskScrollArea = 0;
 }
+
+#include <QDebug>
 
 void NodeContainer::keyPressEvent(QKeyEvent *event)
 {
@@ -41,6 +46,12 @@ void NodeContainer::keyPressEvent(QKeyEvent *event)
 	event->accept();
 }
 
+void NodeContainer::moveScrollBarToBottom(int min, int max)
+{
+	Q_UNUSED(min);
+	taskScrollArea()->verticalScrollBar()->setValue(max);
+}
+
 WidgetFactories *NodeContainer::factories() const
 {
 	return _factories;
@@ -49,4 +60,17 @@ WidgetFactories *NodeContainer::factories() const
 void NodeContainer::setWidgetFactories(WidgetFactories *factories)
 {
 	_factories = factories;
+}
+
+void NodeContainer::setTaskScrollArea(QScrollArea *taskScrollArea)
+{
+	_taskScrollArea = taskScrollArea;
+
+	connect(taskScrollArea->verticalScrollBar(), SIGNAL(rangeChanged(int,int)),
+	        this, SLOT(moveScrollBarToBottom(int,int)));
+}
+
+QScrollArea *NodeContainer::taskScrollArea() const
+{
+	return _taskScrollArea;
 }

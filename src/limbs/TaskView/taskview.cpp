@@ -9,6 +9,7 @@ TaskView::TaskView(WidgetFactories *factories, QWidget *parent) :
 	ui->setupUi(this);
 
 	ui->nodeArea->setWidgetFactories(_factories);
+	ui->nodeArea->setTaskScrollArea(ui->nodeAreaScrollBox);
 }
 
 TaskView::~TaskView()
