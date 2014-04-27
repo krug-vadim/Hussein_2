@@ -1,8 +1,6 @@
 #ifndef BASICINTERFACE_H
 #define BASICINTERFACE_H
 
-#include <QtCore/QtPlugin>
-
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 

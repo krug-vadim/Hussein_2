@@ -1,8 +1,6 @@
 #ifndef FACTORYINTERFACE_H
 #define FACTORYINTERFACE_H
 
-#include <QtCore/QtPlugin>
-
 class FactoryInterface
 {
 	public:

@@ -11,7 +11,7 @@ class TreeInterface;
 
 typedef QSharedPointer<TreeInterface> TreeSharedPointer;
 typedef QWeakPointer<TreeInterface> TreeWeakPointer;
-typedef QList<TreeInterface> TreeNodes;
+typedef QList<TreeSharedPointer> TreeNodes;
 
 class TreeInterface
 {
@@ -63,13 +63,22 @@ class TreeInterface
 			return true;
 		}
 
-		virtual QVariant Task::data(int role) const = 0;
-		virtual bool Task::setData(const QVariant &value, int role) = 0;
+		virtual TreeInterface *create() =0;
+
+		virtual const QStringList &roles() const =0;
+
+		virtual QVariant data(const QString &role) const = 0;
+		virtual bool setData(const QString &role, const QVariant &value) = 0;
+
+	protected:
+		virtual void dataChanged(QVariant &value, const QString &role) =0;
+		virtual void parentChanged(TreeWeakPointer oldParent, TreeWeakPointer newParent) =0;
+		/*virtual void nodeInserted() =0;
+		virtual void nodeRemoved() =0;*/
 
 	private:
 		TreeWeakPointer _parent;
 		TreeNodes       _nodes;
-
 };
 
 Q_DECLARE_INTERFACE(TreeInterface,

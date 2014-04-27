@@ -16,4 +16,5 @@ HEADERS += \
     mainwindowviewinterface.h \
     widgetfactoryinterface.h \
     coreinterface.h \
-    treeinterface.h
+    treeinterface.h \
+    serializerinterface.h
