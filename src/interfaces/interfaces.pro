@@ -15,4 +15,5 @@ HEADERS += \
     savableinterface.h \
     mainwindowviewinterface.h \
     widgetfactoryinterface.h \
-    coreinterface.h
+    coreinterface.h \
+    treeinterface.h
