@@ -63,7 +63,7 @@ class TreeInterface
 			return true;
 		}
 
-		virtual TreeInterface *create() =0;
+		virtual TreeInterface *create(QObject *parent = 0) =0;
 
 		virtual const QStringList &roles() const =0;
 
