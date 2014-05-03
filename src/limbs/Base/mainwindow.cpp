@@ -12,6 +12,9 @@
 #include "../../interfaces/mainwindowdockinterface.h"
 #include "../../interfaces/mainwindowviewinterface.h"
 
+#include "../../interfaces/treeinterface.h"
+#include "../../interfaces/serializerinterface.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -35,6 +38,45 @@ MainWindow::MainWindow(QWidget *parent) :
 	populateToolbars();
 	populateDocks();
 	populateViews();
+
+	TreeInterface *iTree;
+	SerializerInterface *iSerializer;
+
+	foreach(QObject *object, _core.plugins())
+	{
+		iTree = qobject_cast<TreeInterface *>(object);
+
+		if ( !iTree )
+			continue;
+
+		break;
+	}
+
+	foreach(QObject *object, _core.plugins())
+	{
+		iSerializer = qobject_cast<SerializerInterface *>(object);
+
+		if ( !iSerializer )
+			continue;
+
+		break;
+	}
+
+	TreeSharedPointer root(iTree->create());
+
+	iSerializer->deserialize(QString("test2.yml"), root);
+
+	foreach(QObject *object, _core.plugins())
+	{
+		MainWindowViewInterface *iView;
+
+		iView = qobject_cast<MainWindowViewInterface *>(object);
+
+		if ( !iView )
+			continue;
+
+		ui->viewTabs->addTab(iView->newView(root.data(), this), tr("321"));
+	}
 }
 
 MainWindow::~MainWindow()
@@ -101,7 +143,7 @@ void MainWindow::populateViews()
 		if ( !iView )
 			continue;
 
-		ui->viewTabs->addTab(iView->newView(this), tr("123"));
+		//ui->viewTabs->addTab(iView->newView(this), tr("123"));
 	}
 }
 

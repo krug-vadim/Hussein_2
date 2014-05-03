@@ -14,10 +14,10 @@ QString TaskViewPlugin::description() const
 	return tr("Standart task view");
 }
 
-QWidget *TaskViewPlugin::newView(QWidget *parent)
+QWidget *TaskViewPlugin::newView(TreeInterface *tree, QWidget *parent)
 {
 	loadFactories();
-	return new TaskView(&_factories, parent);
+	return new TaskView(tree, &_factories, parent);
 }
 
 void TaskViewPlugin::loadFactories()

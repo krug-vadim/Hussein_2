@@ -21,3 +21,14 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
             pluginsmanagerwidget.ui \
             settingswidget.ui
+
+OTHER_FILES += \
+    Hussein.rc \
+    Hussein.ico
+
+RESOURCES += \
+    Hussein.qrc
+
+win32 {
+    RC_FILE += Hussein.rc
+}

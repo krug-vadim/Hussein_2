@@ -4,6 +4,7 @@
 #include <QtWidgets/QWidget>
 
 #include "../../interfaces/widgetfactoryinterface.h"
+#include "../../interfaces/treeinterface.h"
 
 class QKeyEvent;
 class QVBoxLayout;
@@ -15,10 +16,13 @@ class NodeContainer : public QWidget
 	Q_OBJECT
 
 	public:
-		explicit NodeContainer(WidgetFactories *factories = 0, QWidget *parent = 0);
+		explicit NodeContainer(TreeInterface *tree = 0, WidgetFactories *factories = 0, QWidget *parent = 0);
 
 		WidgetFactories* factories() const;
 		void setWidgetFactories(WidgetFactories *factories);
+
+		TreeInterface* tree() const;
+		void setTree(TreeInterface *tree);
 
 		void setTaskScrollArea(QScrollArea *taskScrollArea);
 		QScrollArea *taskScrollArea() const;
@@ -30,6 +34,9 @@ class NodeContainer : public QWidget
 		void moveScrollBarToBottom(int min, int max);
 
 	private:
+		void setupTree(TreeSharedPointer &node);
+
+		TreeInterface *_tree;
 		WidgetFactories *_factories;
 
 		QScrollArea *_taskScrollArea;

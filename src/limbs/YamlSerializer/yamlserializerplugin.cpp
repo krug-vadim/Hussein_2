@@ -8,7 +8,7 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 
-static const char subNodesKeyName[] = "items";
+static const char subNodesKeyName[] = "tasks";
 
 YamlSerializerPlugin::YamlSerializerPlugin(QObject *parent) :
     QObject(parent)

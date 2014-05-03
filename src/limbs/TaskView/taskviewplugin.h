@@ -6,6 +6,8 @@
 #include "../../interfaces/basicinterface.h"
 #include "../../interfaces/mainwindowviewinterface.h"
 
+#include "../../interfaces/treeinterface.h"
+
 #include "../../interfaces/widgetfactoryinterface.h"
 
 class TaskViewPlugin : public QObject,
@@ -24,7 +26,7 @@ class TaskViewPlugin : public QObject,
 		virtual QString description() const;
 
 		// MainWindowViewInterface
-		virtual QWidget *newView(QWidget *parent = 0);
+		virtual QWidget *newView(TreeInterface *tree, QWidget *parent = 0);
 
 	signals:
 		void log(const uint event, const QString &message) const;

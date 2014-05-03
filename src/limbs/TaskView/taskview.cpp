@@ -1,7 +1,7 @@
 #include "taskview.h"
 #include "ui_taskview.h"
 
-TaskView::TaskView(WidgetFactories *factories, QWidget *parent) :
+TaskView::TaskView(TreeInterface *tree, WidgetFactories *factories, QWidget *parent) :
     QWidget(parent),
     _factories(factories),
     ui(new Ui::TaskView)
@@ -10,6 +10,8 @@ TaskView::TaskView(WidgetFactories *factories, QWidget *parent) :
 
 	ui->nodeArea->setWidgetFactories(_factories);
 	ui->nodeArea->setTaskScrollArea(ui->nodeAreaScrollBox);
+
+	ui->nodeArea->setTree(tree);
 }
 
 TaskView::~TaskView()

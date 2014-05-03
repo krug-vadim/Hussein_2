@@ -3,12 +3,14 @@
 
 class QWidget;
 
+class TreeInterface;
+
 class MainWindowViewInterface
 {
 	public:
 		virtual ~MainWindowViewInterface() {}
 
-		virtual QWidget *newView(QWidget *parent = 0) = 0;
+		virtual QWidget *newView(TreeInterface *tree, QWidget *parent = 0) = 0;
 };
 
 Q_DECLARE_INTERFACE(MainWindowViewInterface,
