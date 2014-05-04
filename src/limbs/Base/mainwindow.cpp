@@ -62,9 +62,9 @@ MainWindow::MainWindow(QWidget *parent) :
 		break;
 	}
 
-	TreeSharedPointer root(iTree->create());
+	_root = iTree->create();
 
-	iSerializer->deserialize(QString("test2.yml"), root);
+	iSerializer->deserialize(QString("test2.yml"), _root);
 
 	foreach(QObject *object, _core.plugins())
 	{
@@ -75,7 +75,8 @@ MainWindow::MainWindow(QWidget *parent) :
 		if ( !iView )
 			continue;
 
-		ui->viewTabs->addTab(iView->newView(root.data(), this), tr("321"));
+		ui->viewTabs->addTab(iView->newView(_root, this), tr("321"));
+		break;
 	}
 }
 

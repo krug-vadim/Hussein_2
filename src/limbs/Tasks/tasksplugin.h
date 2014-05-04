@@ -20,12 +20,13 @@ class TasksPlugin : public QObject,
 
 	public:
 		explicit TasksPlugin(QObject *parent = 0);
+		~TasksPlugin();
 
 		// BasicInterface
 		virtual QString description() const;
 
 		// TreeInterface
-		virtual TreeInterface *create(QObject *parent = 0);
+		virtual TreeSharedPointer create(QObject *parent = 0);
 
 		virtual const QStringList &roles() const;
 

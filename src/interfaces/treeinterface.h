@@ -63,7 +63,7 @@ class TreeInterface
 			return true;
 		}
 
-		virtual TreeInterface *create(QObject *parent = 0) =0;
+		virtual TreeSharedPointer create(QObject *parent = 0) =0;
 
 		virtual const QStringList &roles() const =0;
 

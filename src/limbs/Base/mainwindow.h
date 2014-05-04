@@ -5,6 +5,8 @@
 
 #include "../../core/core.h"
 
+#include "../../interfaces/treeinterface.h"
+
 namespace Ui
 {
 	class MainWindow;
@@ -31,6 +33,8 @@ class MainWindow : public QMainWindow
 		void connectActions();
 
 		Core _core;
+
+		TreeSharedPointer _root;
 
 		PluginsManagerWidget *_pluginsManager;
 		SettingsWidget *_settingsWidget;

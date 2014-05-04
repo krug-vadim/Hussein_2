@@ -1,16 +1,16 @@
 #ifndef MAINWINDOWVIEWINTERFACE_H
 #define MAINWINDOWVIEWINTERFACE_H
 
-class QWidget;
+#include "treeinterface.h"
 
-class TreeInterface;
+class QWidget;
 
 class MainWindowViewInterface
 {
 	public:
 		virtual ~MainWindowViewInterface() {}
 
-		virtual QWidget *newView(TreeInterface *tree, QWidget *parent = 0) = 0;
+		virtual QWidget *newView(TreeSharedPointer &root, QWidget *parent = 0) = 0;
 };
 
 Q_DECLARE_INTERFACE(MainWindowViewInterface,

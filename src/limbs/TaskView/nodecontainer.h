@@ -21,8 +21,8 @@ class NodeContainer : public QWidget
 		WidgetFactories* factories() const;
 		void setWidgetFactories(WidgetFactories *factories);
 
-		TreeInterface* tree() const;
-		void setTree(TreeInterface *tree);
+		TreeSharedPointer &root();
+		void setRoot(TreeSharedPointer &root);
 
 		void setTaskScrollArea(QScrollArea *taskScrollArea);
 		QScrollArea *taskScrollArea() const;
@@ -36,7 +36,7 @@ class NodeContainer : public QWidget
 	private:
 		void setupTree(TreeSharedPointer &node);
 
-		TreeInterface *_tree;
+		TreeSharedPointer _root;
 		WidgetFactories *_factories;
 
 		QScrollArea *_taskScrollArea;

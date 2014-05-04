@@ -26,7 +26,7 @@ class TaskViewPlugin : public QObject,
 		virtual QString description() const;
 
 		// MainWindowViewInterface
-		virtual QWidget *newView(TreeInterface *tree, QWidget *parent = 0);
+		virtual QWidget *newView(TreeSharedPointer &root, QWidget *parent = 0);
 
 	signals:
 		void log(const uint event, const QString &message) const;

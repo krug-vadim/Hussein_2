@@ -16,7 +16,7 @@ class TaskView : public QWidget
 	Q_OBJECT
 
 	public:
-		explicit TaskView(TreeInterface *tree, WidgetFactories *factories = 0, QWidget *parent = 0);
+		explicit TaskView(TreeSharedPointer &root, WidgetFactories *factories = 0, QWidget *parent = 0);
 		~TaskView();
 
 		WidgetFactories* factories() const;

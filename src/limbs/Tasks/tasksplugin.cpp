@@ -1,5 +1,7 @@
 #include "tasksplugin.h"
 
+#include <QDebug>
+
 TasksPlugin::TasksPlugin(QObject *parent)
     : QObject(parent)
 {
@@ -11,6 +13,13 @@ TasksPlugin::TasksPlugin(QObject *parent)
 	_expanded = false;
 	_done = false;
 	_description = tr("(empty)");
+
+	qDebug() << "task created";
+}
+
+TasksPlugin::~TasksPlugin()
+{
+	qDebug() << "task removed";
 }
 
 QString TasksPlugin::description() const
@@ -18,9 +27,9 @@ QString TasksPlugin::description() const
 	return tr("Tree tasks");
 }
 
-TreeInterface *TasksPlugin::create(QObject *parent)
+TreeSharedPointer TasksPlugin::create(QObject *parent)
 {
-	return new TasksPlugin(parent);
+	return TreeSharedPointer(new TasksPlugin(parent));
 }
 
 const QStringList &TasksPlugin::roles() const

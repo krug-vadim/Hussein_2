@@ -6,6 +6,8 @@
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QScrollBar>
 
+#include <QDebug>
+
 NodeContainer::NodeContainer(TreeInterface *tree, WidgetFactories *factories, QWidget *parent) :
     QWidget(parent),
     _factories(factories)
@@ -55,12 +57,13 @@ void NodeContainer::setupTree(TreeSharedPointer &node)
 	if ( !_factories || _factories->isEmpty() )
 		return;
 
-	/*QWidget *newWidget = _factories->at(0)->create(this);
+	QWidget *newWidget = _factories->at(0)->create(this);
 	_taskLayout->insertWidget(_taskLayout->count() - 1, newWidget);
-	newWidget->setFocus(Qt::MouseFocusReason);*/
+	newWidget->setFocus(Qt::MouseFocusReason);
 
 	foreach(TreeSharedPointer subNode, node->nodes())
 	{
+		qDebug() << subNode->data(tr("description"));
 		setupTree(subNode);
 	}
 }
@@ -75,17 +78,18 @@ void NodeContainer::setWidgetFactories(WidgetFactories *factories)
 	_factories = factories;
 }
 
-TreeInterface *NodeContainer::tree() const
+TreeSharedPointer& NodeContainer::root()
 {
-	return _tree;
+	return _root;
 }
 
-void NodeContainer::setTree(TreeInterface *tree)
+void NodeContainer::setRoot(TreeSharedPointer &root)
 {
-	_tree = tree;
+	_root = root;
 
-	TreeSharedPointer root(tree);
 	setupTree(root);
+
+	qDebug() << "out of setTree";
 }
 
 void NodeContainer::setTaskScrollArea(QScrollArea *taskScrollArea)
