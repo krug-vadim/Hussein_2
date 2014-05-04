@@ -17,7 +17,7 @@ QString SimpleNodePlugin::factoryName() const
 	return tr("Simple Node");
 }
 
-QWidget *SimpleNodePlugin::create(QWidget *parent)
+QWidget *SimpleNodePlugin::create(TreeSharedPointer &node, QWidget *parent)
 {
-	return new SimpleNodeWidget(parent);
+	return new SimpleNodeWidget(node, parent);
 }

@@ -23,7 +23,7 @@ class SimpleNodePlugin : public QObject,
 
 		// WidgetFactoryInterface
 		virtual QString factoryName() const;
-		virtual QWidget *create(QWidget *parent = 0);
+		virtual QWidget *create(TreeSharedPointer &node, QWidget *parent = 0);
 
 	signals:
 		void log(const uint event, const QString &message) const;

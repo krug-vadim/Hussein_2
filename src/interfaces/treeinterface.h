@@ -30,6 +30,14 @@ class TreeInterface
 				_nodes.takeFirst().clear();
 		}
 
+		int level()
+		{
+			if ( !parent().isNull() )
+				return 1 + TreeSharedPointer(parent())->level();
+			else
+				return 0;
+		}
+
 		bool appendNode(const TreeSharedPointer &node)
 		{
 			if ( node.isNull() )

@@ -3,6 +3,8 @@
 
 #include <QtCore/QList>
 
+#include "treeinterface.h"
+
 class QWidget;
 
 class WidgetFactoryInterface
@@ -12,7 +14,7 @@ class WidgetFactoryInterface
 
 		virtual QString factoryName() const = 0;
 
-		virtual QWidget *create(QWidget *parent = 0) = 0;
+		virtual QWidget *create(TreeSharedPointer &root, QWidget *parent = 0) = 0;
 };
 
 typedef QList<WidgetFactoryInterface *> WidgetFactories;

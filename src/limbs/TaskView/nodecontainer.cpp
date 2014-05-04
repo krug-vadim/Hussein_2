@@ -33,9 +33,9 @@ void NodeContainer::keyPressEvent(QKeyEvent *event)
 		case Qt::Key_Return:
 			if ( !_factories || _factories->isEmpty() )
 				break;
-			newWidget = _factories->at(0)->create(this);
+			/*newWidget = _factories->at(0)->create(this);
 			_taskLayout->insertWidget(_taskLayout->count() - 1, newWidget);
-			newWidget->setFocus(Qt::MouseFocusReason);
+			newWidget->setFocus(Qt::MouseFocusReason);*/
 			break;
 
 		default:
@@ -57,7 +57,7 @@ void NodeContainer::setupTree(TreeSharedPointer &node)
 	if ( !_factories || _factories->isEmpty() )
 		return;
 
-	QWidget *newWidget = _factories->at(0)->create(this);
+	QWidget *newWidget = _factories->at(0)->create(node, this);
 	_taskLayout->insertWidget(_taskLayout->count() - 1, newWidget);
 	newWidget->setFocus(Qt::MouseFocusReason);
 
