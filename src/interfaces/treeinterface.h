@@ -19,8 +19,8 @@ class TreeInterface
 		TreeInterface() { clear(); }
 		virtual ~TreeInterface() { clear(); }
 
-		TreeWeakPointer parent() const { return _parent; }
-		void setParent(const TreeWeakPointer &parent) { _parent = parent; }
+		const TreeSharedPointer& parent() const { return _parent; }
+		void setParent(const TreeSharedPointer &parent) { _parent = parent; }
 
 		const TreeNodes &nodes() const { return _nodes; }
 
@@ -33,7 +33,7 @@ class TreeInterface
 		int level()
 		{
 			if ( !parent().isNull() )
-				return 1 + TreeSharedPointer(parent())->level();
+				return 1 + parent()->level();
 			else
 				return 0;
 		}
@@ -79,13 +79,16 @@ class TreeInterface
 		virtual bool setData(const QString &role, const QVariant &value) = 0;
 
 	protected:
+		virtual void nodeAdded();
+		virtual void nodeRemoved();
+
 		virtual void dataChanged(QVariant &value, const QString &role) =0;
-		virtual void parentChanged(TreeWeakPointer oldParent, TreeWeakPointer newParent) =0;
+		virtual void parentChanged(TreeSharedPointer &oldParent, TreeSharedPointer &newParent) =0;
 		/*virtual void nodeInserted() =0;
 		virtual void nodeRemoved() =0;*/
 
 	private:
-		TreeWeakPointer _parent;
+		TreeSharedPointer _parent;
 		TreeNodes       _nodes;
 };
 

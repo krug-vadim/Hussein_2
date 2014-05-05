@@ -38,7 +38,7 @@ class TasksPlugin : public QObject,
 	signals:
 		void log(const uint event, const QString &message) const;
 		void dataChanged(QVariant &value, const QString &role);
-		void parentChanged(TreeWeakPointer oldParent, TreeWeakPointer newParent);
+		void parentChanged(TreeSharedPointer &oldParent, TreeSharedPointer &newParent);
 
 	private:
 		QStringList _roles;

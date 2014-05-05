@@ -32,6 +32,7 @@ class NodeContainer : public QWidget
 
 	private slots:
 		void moveScrollBarToBottom(int min, int max);
+		void appendNode(const TreeSharedPointer &root);
 
 	private:
 		void setupTree(TreeSharedPointer &node);

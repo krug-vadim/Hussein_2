@@ -5,6 +5,8 @@
 
 #include "../../interfaces/treeinterface.h"
 
+class QKeyEvent;
+
 namespace Ui
 {
 	class SimpleNodeWidget;
@@ -19,6 +21,12 @@ class SimpleNodeWidget : public QWidget
 		~SimpleNodeWidget();
 
 		TreeSharedPointer &node();
+
+	signals:
+		void appendChild(const TreeSharedPointer &root);
+
+	protected:
+		void keyPressEvent(QKeyEvent *event);
 
 	private:
 		void updateUi();

@@ -29,7 +29,7 @@ void NodeContainer::keyPressEvent(QKeyEvent *event)
 
 	switch ( event->key() )
 	{
-		case Qt::Key_Enter:
+		/*case Qt::Key_Enter:
 		case Qt::Key_Return:
 			if ( !_factories || _factories->isEmpty() )
 				break;
@@ -40,7 +40,7 @@ void NodeContainer::keyPressEvent(QKeyEvent *event)
 			//taskScrollArea()->verticalScrollBar()->setValue(focusWidget()->parentWidget()->pos().ry());
 			taskScrollArea()->ensureWidgetVisible(focusWidget()->parentWidget(), 150, 150);
 			newWidget->setFocus(Qt::MouseFocusReason);
-			break;
+			break;*/
 
 		default:
 			return;
@@ -55,6 +55,11 @@ void NodeContainer::moveScrollBarToBottom(int min, int max)
 	Q_UNUSED(min);
 	qDebug() << min << max;
 	//taskScrollArea()->verticalScrollBar()->setValue(max);
+}
+
+void NodeContainer::appendNode(const TreeSharedPointer &root)
+{
+	qDebug() << "appendNode";
 }
 
 void NodeContainer::setupTree(TreeSharedPointer &node)
