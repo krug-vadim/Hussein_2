@@ -4,6 +4,8 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QToolBar>
 
+#include <QtCore/QSignalMapper>
+
 #include "pluginsmanagerwidget.h"
 #include "settingswidget.h"
 
@@ -11,6 +13,8 @@
 #include "../../interfaces/mainwindowtoolbarinterface.h"
 #include "../../interfaces/mainwindowdockinterface.h"
 #include "../../interfaces/mainwindowviewinterface.h"
+
+#include "../../interfaces/commandinterface.h"
 
 #include "../../interfaces/treeinterface.h"
 #include "../../interfaces/serializerinterface.h"
@@ -39,7 +43,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	populateDocks();
 	populateViews();
 
-	TreeInterface *iTree;
+	populateCommands();
+
+	/*TreeInterface *iTree;
 	SerializerInterface *iSerializer;
 
 	foreach(QObject *object, _core.plugins())
@@ -77,7 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 		ui->viewTabs->addTab(iView->newView(_root, this), tr("321"));
 		break;
-	}
+	}*/
 }
 
 MainWindow::~MainWindow()
@@ -146,6 +152,43 @@ void MainWindow::populateViews()
 
 		//ui->viewTabs->addTab(iView->newView(this), tr("123"));
 	}
+}
+
+void MainWindow::populateCommands()
+{
+	commandMapper = new QSignalMapper(this);
+
+	connect(commandMapper, SIGNAL(mapped(QObject*)),
+	        this, SLOT(executeCommand(QObject*)));
+
+	foreach(QObject *object, _core.plugins())
+	{
+		CommandInterface *iCommand;
+
+		iCommand = qobject_cast<CommandInterface *>(object);
+
+		if ( !iCommand )
+			continue;
+
+		ui->menuCommands->addAction(object->objectName());
+
+		connect(ui->menuCommands->actions().last(), SIGNAL(triggered()),
+		        commandMapper, SLOT(map()));
+
+		commandMapper->setMapping(ui->menuCommands->actions().last(), object);
+	}
+}
+
+void MainWindow::executeCommand(QObject *object)
+{
+	CommandInterface *iCommand;
+
+	iCommand = qobject_cast<CommandInterface *>(object);
+
+	if ( !iCommand )
+		return;
+
+	iCommand->execute(TreeSharedPointer());
 }
 
 void MainWindow::connectActions()

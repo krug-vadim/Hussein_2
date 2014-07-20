@@ -86,6 +86,20 @@ bool YamlSerializerPlugin::deserialize(const QString &fileName, TreeSharedPointe
 		return false;
 }
 
+#include <QtWidgets/QFileDialog>
+
+const TreeSharedPointer YamlSerializerPlugin::execute(const TreeSharedPointer &node) const
+{
+	QString fileName = QFileDialog::getOpenFileName(0,
+	                                                tr("Open File"),
+	                                                "/home",
+	                                                tr("Any (*.*)"));
+
+	emit log(0, fileName);
+
+	return node;
+}
+
 void YamlSerializerPlugin::serializeNode(YAML::Emitter &out, TreeSharedPointer node)
 {
 	out << YAML::BeginMap;

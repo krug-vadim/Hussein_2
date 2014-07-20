@@ -12,6 +12,8 @@ namespace Ui
 	class MainWindow;
 }
 
+class QSignalMapper;
+
 class PluginsManagerWidget;
 class SettingsWidget;
 
@@ -29,12 +31,17 @@ class MainWindow : public QMainWindow
 		void populateDocks();
 		void populateViews();
 
+		void populateCommands();
+		void executeCommand(QObject *object);
+
 	private:
 		void connectActions();
 
 		Core _core;
 
 		TreeSharedPointer _root;
+
+		QSignalMapper *commandMapper;
 
 		PluginsManagerWidget *_pluginsManager;
 		SettingsWidget *_settingsWidget;

@@ -17,4 +17,5 @@ HEADERS += \
     widgetfactoryinterface.h \
     coreinterface.h \
     treeinterface.h \
-    serializerinterface.h
+    serializerinterface.h \
+    commandinterface.h

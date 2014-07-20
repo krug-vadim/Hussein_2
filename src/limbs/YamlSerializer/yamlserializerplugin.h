@@ -6,6 +6,8 @@
 #include "../../interfaces/basicinterface.h"
 #include "../../interfaces/serializerinterface.h"
 
+#include "../../interfaces/commandinterface.h"
+
 #include <QtCore/QByteArray>
 #include <QtCore/QVariant>
 
@@ -17,11 +19,13 @@ namespace YAML
 
 class YamlSerializerPlugin : public QObject,
                              public BasicInterface,
+                             public CommandInterface,
                              public SerializerInterface
 {
 	Q_OBJECT
 	Q_PLUGIN_METADATA(IID "org.Hussein.YamlSerializerPlugin")
 	Q_INTERFACES(BasicInterface)
+	Q_INTERFACES(CommandInterface)
 	Q_INTERFACES(SerializerInterface)
 
 	public:
@@ -36,6 +40,9 @@ class YamlSerializerPlugin : public QObject,
 
 		virtual void deserialize(const QByteArray &data, TreeSharedPointer root);
 		virtual bool deserialize(const QString &fileName, TreeSharedPointer root);
+
+		// CommandInterface
+		virtual const TreeSharedPointer execute(const TreeSharedPointer &node) const;
 
 	signals:
 		void log(const uint event, const QString &message) const;
