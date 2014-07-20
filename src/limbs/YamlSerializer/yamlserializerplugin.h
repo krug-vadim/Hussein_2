@@ -44,6 +44,9 @@ class YamlSerializerPlugin : public QObject,
 		// CommandInterface
 		virtual const TreeSharedPointer execute(const TreeSharedPointer &node) const;
 
+		//
+		virtual const Commands &commands(QObject *parent = 0);
+
 	signals:
 		void log(const uint event, const QString &message) const;
 
@@ -54,6 +57,8 @@ class YamlSerializerPlugin : public QObject,
 
 		static bool toYaml(YAML::Emitter &out, const QVariant &data);
 		static QVariant fromYaml(const YAML::Node &node);
+
+		Commands _commands;
 };
 
 #endif // YAMLSERIALIZERPLUGIN_H

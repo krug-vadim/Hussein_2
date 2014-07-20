@@ -100,6 +100,14 @@ const TreeSharedPointer YamlSerializerPlugin::execute(const TreeSharedPointer &n
 	return node;
 }
 
+const Commands &YamlSerializerPlugin::commands(QObject *parent)
+{
+	_commands.clear();
+	//_commands.append( new YamlSerializeCommand(parent) );
+	//_commands.append( new YamlDeserializeCommand(parent) );
+	return _commands;
+}
+
 void YamlSerializerPlugin::serializeNode(YAML::Emitter &out, TreeSharedPointer node)
 {
 	out << YAML::BeginMap;

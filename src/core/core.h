@@ -38,6 +38,9 @@ class Core : public QObject,
 
 		QObjectHash _objects;
 		QObjectList _plugins;
+
+		QObjectList _commands;
+
 		PluginMetaData _pluginsMetaData;
 };
 
